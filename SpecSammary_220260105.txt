@@ -1,0 +1,67 @@
+NiMHCHG_22025 - Bottom Copper.gbr
+NiMHCHG_22025 - Bottom Resist.gbr
+NiMHCHG_22025 - Bottom Silkscreen.gbr
+NiMHCHG_22025 - Mechanical.gbr
+NiMHCHG_22025 - Top Copper.gbr
+NiMHCHG_22025 - Top Resist.gbr
+NiMHCHG_22025 - Top Silkscreen.gbr
+NiMHCHG_22025 - NC Drill Data - [Through Hole].drl
+
+
+元ファイル名  →  リネーム後のファイル名
+[プロジェクト名] - Top Copper.gbr	→	[プロジェクト名].gtl
+[プロジェクト名] - Top Resist.gbr	→	[プロジェクト名].gts
+[プロジェクト名] - Top Silkscreen.gbr	→	[プロジェクト名].gto
+[プロジェクト名] - Bottom Copper.gbr	→	[プロジェクト名].gbl
+[プロジェクト名] - Bottom Resist.gbr	→	[プロジェクト名].gbs
+[プロジェクト名] - Bottom Silkscreen.gbr	→	[プロジェクト名].gbo
+[プロジェクト名] - Mechanical.gbr	→	[プロジェクト名].gko
+[プロジェクト名] - NC Drill Data - [Through Hole].drl	→	[プロジェクト名].txt
+
+以下のようなファイル名を変換するGUIアプリをpythonで作ってください
+・Windows11で動作する
+・元ファイルはGUIから1個 選択する。ファイル選択はOS標準のインターフェースを使用する。
+  選択したファイルから[プロジェクト名]を取得して、他の7個の元ファイル名は
+・ファイルを選択したらリネームを開始する
+・ファイルが不足していれば、リネーム前にアラートを出す。
+
+元ファイル名 → リネーム後のファイル名
+[プロジェクト名] - Top Copper.gbr → [プロジェクト名].gtl
+[プロジェクト名] - Top Resist.gbr → [プロジェクト名].gts
+[プロジェクト名] - Top Silkscreen.gbr → [プロジェクト名].gto
+[プロジェクト名] - Bottom Copper.gbr → [プロジェクト名].gbl
+[プロジェクト名] - Bottom Resist.gbr → [プロジェクト名].gbs
+[プロジェクト名] - Bottom Silkscreen.gbr → [プロジェクト名].gbo
+[プロジェクト名] - Mechanical.gbr → [プロジェクト名].gko
+[プロジェクト名] - NC Drill Data - [Through Hole].drl → [プロジェクト名].txt
+
+作成にあたり、不明点があれば、生成前に指摘してください。合意後に作成開始してください
+
+
+1.プロジェクト名の抽出ルールについて 
+抽出の際、「ハイフンとスペース（ -）」を区切り文字として使用する想定でよろしいでしょうか？ 例：MyProject - Top Copper.gbr を選択した場合、最初の - より前の MyProject をプロジェクト名(NiMHCHG_22025)と見なします。
+A: OKです。例として、以下のようなファイル群が電子CADの製造データとして作成されます
+NiMHCHG_22025 - Bottom Copper.gbr
+NiMHCHG_22025 - Bottom Resist.gbr
+NiMHCHG_22025 - Bottom Silkscreen.gbr
+NiMHCHG_22025 - Mechanical.gbr
+NiMHCHG_22025 - Top Copper.gbr
+NiMHCHG_22025 - Top Resist.gbr
+NiMHCHG_22025 - Top Silkscreen.gbr
+NiMHCHG_22025 - NC Drill Data - [Through Hole].drl
+
+2.どのファイルを選択してもよいか 
+変換リストにある8種類のファイル（Top Copper.gbr, NC Drill Data - [Through Hole].drl など）のうち、どれを1つ選択しても、同じディレクトリにある他の7個を探しに行ってリネームを開始するという動作でよろしいでしょうか？
+A: OKです。
+
+3.リネームの実行タイミング 
+「ファイルを選択したらリネームを開始する」とのことですので、ダイアログでファイルを選んで「開く」を押した瞬間に（確認ボタンなどを介さず）チェックと実行を行う形でよろしいでしょうか？
+A: ファイルを選択→他7個のファイルの存在をチェック→8個すべてあれば変換、不足があればアラートを出す(OKを押したら元画面に戻る)
+
+4.同名ファイルが存在する場合 
+リネーム後のファイル名（例：[プロジェクト名].gtl）が既に同じフォルダに存在する場合、上書きしてもよろしいでしょうか？それともエラーとして停止すべきでしょうか？
+A: 上書きでOK。ただし、上書きすることの確認ダイアログを表示してください
+
+5.ライブラリの選定 
+Python標準の tkinter を使用すれば、追加のインストールなしでWindows標準に近い外観のGUIを作成可能です。こちらで進めてよろしいでしょうか？
+A: OKです
