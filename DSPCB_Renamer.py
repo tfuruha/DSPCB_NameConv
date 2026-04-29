@@ -59,7 +59,8 @@ class DSPCBRenamer:
             messagebox.showerror("エラー", "ファイル名からプロジェクト名（' - ' より前の部分）を特定できませんでした。")
             return
 
-        # 3. 全8ファイルの存在確認
+        # 3. 保存先フォルダの決定とファイル存在確認
+        target_dir = directory / project_name
         missing_files = []
         file_list_to_rename = []
         
@@ -67,7 +68,7 @@ class DSPCBRenamer:
             src_name = f"{project_name}{suffix}"
             src_path = directory / src_name
             dest_name = f"{project_name}{new_ext}"
-            dest_path = directory / dest_name
+            dest_path = target_dir / dest_name
             
             if src_path.exists():
                 file_list_to_rename.append((src_path, dest_path))
@@ -86,17 +87,20 @@ class DSPCBRenamer:
             if not messagebox.askyesno("上書き確認", "変換後のファイル名が既にいくつか存在します。上書きしてもよろしいですか？"):
                 return
 
-        # 5. リネーム実行
+        # 5. リネーム（移動）実行
         try:
+            # 保存先フォルダの作成
+            target_dir.mkdir(exist_ok=True)
+
             for src, dest in file_list_to_rename:
                 # 既にdestが存在する場合に備え、一度削除する(Windowsでの上書き保証)
                 if dest.exists():
                     dest.unlink()
                 src.rename(dest)
             
-            # リネーム成功後、該当フォルダをエクスプローラーで開く
+            # リネーム成功後、作成されたフォルダをエクスプローラーで開く
             try:
-                os.startfile(directory)
+                os.startfile(target_dir)
             except:
                 pass
 
