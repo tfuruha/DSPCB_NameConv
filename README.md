@@ -38,3 +38,6 @@ python DSPCB_Renamer.py
 
 ---
 対応OS: Windows 11
+
+## ライセンス
+このプロジェクトは [MIT ライセンス](LICENSE) のもとで公開されています。
